@@ -1,2 +1,3 @@
-.git
+.git/
 .env
+vault.txt

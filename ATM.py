@@ -1,4 +1,4 @@
-
+import datetime
 print("WELCOME TO WEBER BANK")
 account_balance = 50000
 bank_operation = ["1 CHECK BALANCE",
@@ -36,26 +36,42 @@ def show_options():
     print("#pick an option ")
     for operation in bank_operation:
        print(operation)
-    
+
+  
     
 while True :
-       
+         x= datetime.date.today()
+         print(x) 
          show_options()
          choice=int(input("choose an option: "))     
-         pin =int(input("enter your pin:  "))
+         
+pin =int(input("enter your pin:  "))
          
          
-         if pin != 2030:
-               print("incorrect pin account will be blocked after 5 inorrect trials")
-               pin =int(input("enter your pin:  "))
-         if choice ==1:
-             balance()
-              
-         if choice==2:
-           withdrawal()
-         if choice==3:
-           deposit() 
-         if choice==4:
+if pin != 2030:
+      print("incorrect pin account will be blocked after 5 inorrect trials")
+      pin =int(input("enter your pin : "))
+   
+if choice ==1:
+    balance()
+
+
+if choice==2:
+    withdrawal()
+if choice==3:
+    deposit()
+
+if choice==4:
+    transfer()
+           
+           
+next_operation=(input('do you want to perform another transaction: '))
+if next_operation!=yes:
+  print("THANK YOU FOR CHOOSING WEBER BANK")
+  break
+  
+else:
+    show_options()
             
-            break
+            
 
