@@ -1,7 +1,18 @@
+from pyparsing import matchOnlyAtCol
 import json
 import os
+print(os.getcwd())
+import datetime
+import time
 
+current_time= datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p")
+print(current_time)
+
+
+
+# This gets the exact folder where Weber deck.py is saved
 FILENAME="flashcard.json"
+
 
 
 def load_flashcards():
@@ -59,10 +70,12 @@ def study_deck(flashcards):
   print("\n" + "=" * 30)
   print("---STUDY SESSION\U0001F4DA---")
   print("\n" + "=" * 30)
+  session_start_time=time.time()
   score = 0
   total = len(flashcards)
   for question, answer in flashcards.items():
     print(f"\nQ: {question}")
+    start_time= time.time()
     user_input = (
         input("press Enter to see answer (or type quit to quit): ")
         .strip()
@@ -71,11 +84,18 @@ def study_deck(flashcards):
     if user_input == "quit":
       print("YOUR STUDY SESSION ENDED EARLY")
       break
+      end_time=time.time()
+      elapsed_time = round(end_time - start_time, 2)
     print(f"A: {answer}")
+    print(f"Time taken for this card is {elapsed_time}seconds")
     learner_input = input("DID YOU GET IT Y/N? ").strip().upper()
     if learner_input == "Y":
       score += 1
-  print(f"\nSESSION FINISHED! YOU GOT {score} out of {total} \U0001F389")
+    session_end_time=time.time()
+    total_session_time= round(session_end_time- session_start_time,2)
+  print("\nSESSION FINISHED!)
+  print(f"YOU GOT {score} out of {total} \U0001F389")
+  print(f"Total study time is {total_session_time}")
 
 
 def main():
@@ -105,6 +125,7 @@ def main():
     elif choice == 3:
       study_deck(flashcards)
     elif choice == 4:
+      save_flashcards(flashcards)
       print(
           f"\nCongratulations {name}! You finished the WeberDeck session!"
           " \U0001F389\U0001F3C6"
